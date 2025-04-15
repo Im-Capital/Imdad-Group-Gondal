@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="ઈમદાદ ગ્રુપ - ગોંડલ, મુસ્લિમ સમાજ માટે સહાય, શિક્ષા, આરોગ્ય અને સમાજ સેવા માટે." />
+  <meta name="keywords" content="ઈમદાદ ગ્રુપ, ગોંડલ, મુસ્લિમ સહાય, શિક્ષા, આરોગ્ય, સમાજ સેવા" />
+  <meta name="author" content="Imdad Group" />
+  <title>ઈમદાદ ગ્રુપ - ગોંડલ</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Animate.css for extra animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <style>
+    /* Color Palette & Base Variables */
+    :root {
+      --primary: #2C3E50;    /* Navy Blue */
+      --secondary: #E67E22;  /* Vibrant Orange */
+      --accent: #F1C40F;     /* Bright Accent */
+      --bg: #ffffff;
+      --text: #2d3436;
+      --nav-bg: linear-gradient(90deg, #2C3E50, #34495E);
+    }
+
+    /* Global Reset & Smooth Transitions */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      transition: all 0.3s ease;
+    }
+    body {
+      font-family: 'Poppins', 'Noto Sans Gujarati', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    .gujarati-text {
+      font-family: 'Noto Sans Gujarati', sans-serif;
+    }
+
+    /* Navbar Styling */
+    header {
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      background: var(--nav-bg);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    nav .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #fff;
+    }
+    nav .brand i {
+      font-size: 1.8rem;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    nav ul li a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 0.25rem;
+    }
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--secondary);
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+    /* Mobile Menu Button */
+    #menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+    }
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      #menu-btn { display: block; }
+    }
+    /* Off-canvas Mobile Menu */
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      padding: 1rem 2rem;
+      z-index: 999;
+    }
+    #mobile-menu.active {
+      display: block;
+      animation: slideDown 0.3s forwards;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    #mobile-menu ul { list-style: none; }
+    #mobile-menu ul li { margin-bottom: 1rem; }
+    #mobile-menu ul li a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    #mobile-menu ul li a:hover { 
+      color: var(--accent); 
+    }
+
+    /* Hero Section */
+    .hero-section {
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1519817650390-64a93db51149?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')
+                  center/cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: bounceIn 1s ease-out;
+    }
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.8) translateY(-20px); }
+      60% { opacity: 1; transform: scale(1.05) translateY(10px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+    .hero-section h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+    .hero-section p { font-size: 1.5rem; margin-bottom: 2rem; }
+
+    /* Section Formatting with Scroll Animation */
+    section {
+      padding: 5rem 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .section-visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    /* Glass Card Effect */
+    .glass-card {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(44, 62, 80, 0.3);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    }
+    .glass-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+
+    /* Button Style */
+    .btn {
+      background: var(--secondary);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    .btn:hover { background: var(--accent); }
+
+    /* Footer Styling */
+    footer {
+      background: var(--primary);
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+    }
+    footer a {
+      color: var(--accent);
+      margin: 0 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <nav>
+      <div class="brand">
+        <i class="fas fa-hands-helping"></i>
+        <span class="gujarati-text">ઈમદાદ ગ્રુપ - ગોંડલ</span>
+      </div>
+      <ul class="hidden md:flex">
+        <li><a href="#about">અમારા વિશે</a></li>
+        <li><a href="#mission">ઉદ્દેશ</a></li>
+        <li><a href="#donate">ઈમદાદ કરો</a></li>
+        <li><a href="#contact">સંપર્ક કરો</a></li>
+        <li><a href="#monthly-data">આવક અને ખર્ચ</a></li>
+        <li><a href="tel:+918238258024">Devloper</a></li>
+      </ul>
+      <button id="menu-btn"><i class="fas fa-bars"></i></button>
+    </nav>
+    <!-- Mobile Off-Canvas Menu -->
+    <div id="mobile-menu">
+      <ul>
+        <li><a href="#about">અમારા વિશે</a></li>
+        <li><a href="#mission">ઉદ્દેશ</a></li>
+        <li><a href="#donate">ઈમદાદ કરો</a></li>
+        <li><a href="#contact">સંપર્ક કરો</a></li>
+        <li><a href="#monthly-data">આવક અને ખર્ચ</a></li>
+        <li><a href="tel:+918238258024">Devloper</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="gujarati-text">મુસ્લિમ સમાજ માટે સહાય</h1>
+      <p class="gujarati-text">શિક્ષા અને આરોગ્ય માટે સહાયરૂપ બનવાની એક પહેલ</p>
+      <a href="#donate" class="btn">
+        <i class="fas fa-hand-holding-heart mr-2"></i> ઈમદાદ કરો
+      </a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 gujarati-text">ગ્રુપ વિશે</h2>
+        <div class="w-20 h-1 mx-auto bg-orange-500 my-4"></div>
+      </div>
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="md:w-1/2">
+          <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Community Help" class="rounded-xl shadow-2xl transition-transform hover:scale-105" />
+        </div>
+        <div class="md:w-1/2">
+          <div class="glass-card">
+            <h3 class="text-2xl font-bold gujarati-text mb-4">ઈમદાદ ગ્રુપ - ગોંડલ</h3>
+            <p class="text-sm text-gray-700 mb-4 gujarati-text">સ્થાપના : 2024</p>
+            <p class="text-gray-800 mb-4 gujarati-text">
+              આ ગ્રુપ ફક્ત મુસ્લિમ કૌમ માટે જ છે. ગ્રુપનો ઉદ્દેશ મુસ્લિમોને સંગઠિત કરી એકબીજાની મદદ કરવાનો અને કૌમમાં એકતા લાવવાનો છે.
+            </p>
+            <p class="text-gray-800 gujarati-text">
+              જો કોઇ મુસ્લિમ વિદ્યાર્થી પાઠ્ય પુસ્તક, નોટબુક, સ્ટેશનરી, અથવા સ્કૂલ ફીની જરૂરિયાત ધરાવે તો એડમીનનો સંપર્ક કરી શકે છે.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section id="mission" class="bg-gray-100">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 gujarati-text">અમારો ઉદ્દેશ</h2>
+        <div class="w-20 h-1 mx-auto bg-orange-500 my-4"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="glass-card text-center">
+          <div class="text-4xl text-orange-500 mb-4">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <h3 class="text-xl font-semibold gujarati-text mb-2">શિક્ષણ સહાય</h3>
+          <p class="text-gray-800 gujarati-text">
+            નબળા મુસ્લિમ વિદ્યાર્થીને સ્કૂલ ફી, પુસ્તકો અને શૈક્ષણિક સુવિધા માટે સહાય.
+          </p>
+        </div>
+        <div class="glass-card text-center">
+          <div class="text-4xl text-orange-500 mb-4">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <h3 class="text-xl font-semibold gujarati-text mb-2">આરોગ્ય સહાય</h3>
+          <p class="text-gray-800 gujarati-text">
+            ગરીબ દર્દીને દવા અને લેબોરેટરી માં સહાય
+          </p>
+        </div>
+        <div class="glass-card text-center">
+          <div class="text-4xl text-orange-500 mb-4">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <h3 class="text-xl font-semibold gujarati-text mb-2">રાશન સહાય</h3>
+          <p class="text-gray-800 gujarati-text">
+            જરૂરીયાતમંદને રાશન કીટ માં સહાય
+          </p>
+        </div>
+      </div>
+      <div class="max-w-4xl mx-auto mt-12">
+        <div class="glass-card text-center p-8">
+          <div class="text-4xl text-orange-500 mb-4">
+            <i class="fa-solid fa-person-chalkboard"></i>
+          </div>
+          <h3 class="text-xl font-semibold gujarati-text mb-2">સીવણ તથા મહેંદી માં સહાય</h3>
+          <p class="text-gray-800 gujarati-text">
+            બહેનો માટે સીવણ અને મેહેંદી ક્લાસીસ માટે સહાય.
+          </p>
+        </div>
+        <div class="glass-card mt-8">
+          <p class="text-gray-800 text-center gujarati-text">
+            બધી જ જરૂરત સમય સંજોગો ને આધિન છે અને જે તે નિર્ણય એડમીન લ્યે તે માન્ય રહેશે.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donation Section -->
+  <section id="donate">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 gujarati-text">ઈમદાદ કરો</h2>
+        <div class="w-20 h-1 mx-auto bg-orange-500 my-4"></div>
+        <p class="text-gray-800 mt-4 max-w-2xl mx-auto gujarati-text">
+          તમારું ઈમદાદ ગરીબ વિદ્યાર્થીઓ અને જરૂરીયાતમંદ દર્દીઓના જીવનમાં ફેર લાવશે.
+        </p>
+      </div>
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Bank Transfer Card -->
+        <div class="glass-card lg:w-1/2">
+          <h3 class="text-2xl font-bold text-gray-800 gujarati-text mb-6">બેંક ટ્રાન્સફર</h3>
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <div class="p-3 bg-orange-500 text-white rounded-full text-xl">
+                <i class="fas fa-university"></i>
+              </div>
+              <div>
+                <h4 class="font-medium gujarati-text">બેંકનું નામ</h4>
+                <p class="text-gray-800 gujarati-text">BANK OF BARODA-GONDAL BRANCH</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="p-3 bg-orange-500 text-white rounded-full text-xl">
+                <i class="fas fa-user"></i>
+              </div>
+              <div>
+                <h4 class="font-medium gujarati-text">એકાઉન્ટ હોલ્ડરનું નામ</h4>
+                <p class="text-gray-800 gujarati-text">RAJWANI HUMA FARUKBHAI</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="p-3 bg-orange-500 text-white rounded-full text-xl">
+                <i class="fas fa-id-card"></i>
+              </div>
+              <div>
+                <h4 class="font-medium gujarati-text">એકાઉન્ટ નંબર</h4>
+                <p class="text-gray-800">08080100023635</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="p-3 bg-orange-500 text-white rounded-full text-xl">
+                <i class="fas fa-code"></i>
+              </div>
+              <div>
+                <h4 class="font-medium gujarati-text">IFSC કોડ</h4>
+                <p class="text-gray-800">BARB0GONDAL (પાંચમો અંક ઝીરો)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Google Pay / UPI Card -->
+        <div class="glass-card lg:w-1/2">
+          <h3 class="text-2xl font-bold text-gray-800 gujarati-text mb-6">Google Pay</h3>
+          <div class="flex flex-col md:flex-row gap-8 items-center">
+            <div class="flex-1">
+              <div class="flex items-center gap-4 mb-6">
+                <div class="p-3 bg-orange-500 text-white rounded-full text-xl">
+                  <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div>
+                  <h4 class="font-medium gujarati-text">Google Pay નંબર</h4>
+                  <p class="text-gray-800">9798278692</p>
+                </div>
+              </div>
+              <a href="upi://pay?pa=humarajwani-2@okaxis&pn=Imdad%20Group&cu=INR" class="btn">
+                <i class="fab fa-google-pay mr-2"></i> Google Pay
+              </a>
+            </div>
+            <div class="flex-1 text-center">
+              <div class="inline-block p-4 bg-white rounded-xl shadow-lg hover:scale-105">
+                <a href="upi://pay?pa=humarajwani-2@okaxis&pn=Imdad%20Group&cu=INR">
+                  <img src="src/qr.jpg" alt="QR Code" class="w-28 h-28" />
+                </a>
+              </div>
+              <p class="text-sm text-gray-800 gujarati-text mt-2">QR કોડ Click કરો</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card mt-12 mx-auto max-w-3xl p-6">
+        <p class="text-gray-800 text-center gujarati-text">
+          તો ફરી બધાજ સભ્યને વિનંતી કે આ મુહિમમાં શક્ય તેટલી વધારે મદદ કરવી. ગ્રુપનો મૂળ હેતુ શિક્ષણ અને દર્દીને સપોર્ટ કરવાનો છે.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="bg-gray-100">
+    <div class="container mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 gujarati-text">સંપર્ક કરો</h2>
+        <div class="w-20 h-1 mx-auto bg-orange-500 my-4"></div>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 justify-center">
+        <div class="glass-card md:w-1/2 p-4">
+          <h3 class="text-2xl font-bold text-gray-800 gujarati-text mb-6">એડમિન સંપર્ક</h3>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="p-3 bg-orange-500 text-white rounded-full">
+              <i class="fas fa-user"></i>
+            </div>
+            <div>
+              <h4 class="font-medium gujarati-text">હુમા ટીચર</h4>
+              <a href="tel:+919798278692"><p class="text-gray-800">9798278692</p></a>
+            </div>
+          </div>
+          <!-- Updated Admin Buttons: Responsive and with hover effects -->
+            <a href="https://wa.me/+919798278692" target="_blank" class="btn flex items-center justify-center hover:bg-orange-600 sm:flex-1 mb-4">
+              <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+            </a>
+            <a href="tel:+919798278692" class="btn flex items-center justify-center bg-blue-600 hover:bg-blue-700 sm:flex-1">
+              <i class="fas fa-phone mr-2"></i> કોલ કરો
+            </a>
+          </div>
+        </div>
+        <div class="glass-card md:w-1/2 p-4 mt-6">
+          <h3 class="text-2xl font-bold text-gray-800 gujarati-text mb-6">અમારા WhatsApp ગ્રુપમાં જોડાઓ</h3>
+          <p class="text-gray-800 mb-6 gujarati-text">
+            અમારા ગ્રુપમાં જોડાઈને સમાજ સેવાની પ્રવૃત્તિઓમાં ભાગ લો.
+          </p>
+          <a href="https://chat.whatsapp.com/CbeizXI3sstDIqy3iV5Kxr" class="btn flex items-center justify-center">
+            <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- ------------------------------------------------------------------------------------------------------------------------- -->
+<!-- Monthly Data Section (Past Income & Expenses) -->
+<section id="monthly-data" class="bg-gray-100">
+  <div class="container mx-auto py-12">
+    <!-- Section Header -->
+    <h2 class="text-4xl font-bold text-center gujarati-text">
+      માસિક આવક અને ખર્ચ
+    </h2>
+    <p class="text-center text-gray-800 mt-2 gujarati-text">
+      <span class="font-bold">નોંધ :-</span> સીવણ ક્લાસીસ માં ખર્ચ પેટે જે રકમ જાય છે તે અત્યાર સુધી આમાં ઉમેરેલ નથી.
+    </p>
+
+    <!-- Month Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+
+  <!-- Visible Month Card (Demo)
+  <div class="month-data glass-card p-6 animate__animated animate__fadeInUp">
+    <h3 class="text-2xl font-bold gujarati-text">માર્ચ 2025</h3>
+    <div class="mt-4 gujarati-text text-gray-800 space-y-2">
+    <h5 class="text-xl gujarati-text text-orange-500 font-bold mb-4">ખર્ચ :</h5>
+      <p><strong>શિક્ષણ (Education) :</strong> ₹<span class="education">3624</span></p>
+      <p><strong>આરોગ્ય (Health) :</strong> ₹<span class="health">0</span></p>
+      <p><strong>અન્ય (Other) :</strong> ₹<span class="other">7100</span></p> <br>
+    <h5 class="text-xl gujarati-text text-orange-500 font-bold mb-4">ટોટલ</h5>
+      <p class="border-t pt-2 mt-2"><strong>પાછલું બેલેન્સ :</strong> ₹<span class="total">1,19,704</span></p> 
+      <p class="border-t pt-2 mt-2"><strong>ટોટલ આવક :</strong> ₹<span class="total">44,463</span></p>
+      <p class="border-t pt-2 mt-2"><strong>ટોટલ ખર્ચ :</strong> ₹<span class="total">10,824</span></p>
+      <p class="border-t pt-2 mt-2"><strong>પુરાંત :</strong> ₹<span class="total">1,08,880</span></p>
+    </div>
+  </div> -->
+
+      <!-- Visible Month Card 1 -->
+      <div class="month-data glass-card p-6 animate__animated animate__fadeInUp">
+        <h3 class="text-2xl font-bold gujarati-text">માર્ચ 2025</h3>
+        <div class="mt-4 gujarati-text text-gray-800 space-y-2">
+        <h5 class="text-xl gujarati-text text-orange-500 font-bold mb-4">ખર્ચ :</h5>
+          <p><strong>શિક્ષણ (Education) :</strong> ₹<span class="education">3624</span></p>
+          <p><strong>આરોગ્ય (Health) :</strong> ₹<span class="health">0</span></p>
+          <p><strong>અન્ય (Other) :</strong> ₹<span class="other">7100</span></p> <br>
+        <h5 class="text-xl gujarati-text text-orange-500 font-bold mb-4">ટોટલ</h5>
+          <p class="border-t pt-2 mt-2"><strong>પાછલું બેલેન્સ :</strong> ₹<span class="total">1,19,704</span></p> 
+          <p class="border-t pt-2 mt-2"><strong>ટોટલ આવક :</strong> ₹<span class="total">44,463</span></p>
+          <p class="border-t pt-2 mt-2"><strong>ટોટલ ખર્ચ :</strong> ₹<span class="total">10,824</span></p>
+          <p class="border-t pt-2 mt-2"><strong>પુરાંત :</strong> ₹<span class="total">1,08,880</span></p>
+        </div>
+      </div>
+      
+      <!-- Hidden Extra Month Cards Container -->
+      <div id="moreMonths" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8 col-span-full">
+         
+         <!-- Extra Here -->
+      
+      </div>
+    </div>
+
+<!----------------------------------------------------------------------------------------------------------------------------->
+
+    <!-- Toggle Button to Show/Hide Extra Month Cards -->
+    <div class="text-center mt-8">
+      <button id="toggleMonths" class="btn">
+        <i class="fas fa-eye mr-2"></i> More
+      </button>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container mx-auto">
+      <div class="mb-4">
+        <div class="flex items-center justify-center gap-2">
+          <i class="fas fa-hands-helping text-3xl"></i>
+          <span class="text-2xl font-bold gujarati-text">ઈમદાદ ગ્રુપ - ગોંડલ</span>
+        </div>
+        <p class="mt-2">મુસ્લિમ સમાજ માટે સહાય અને એકતા</p>
+      </div>
+      <div class="flex justify-center gap-4 mb-4">
+        <a href="https://m.facebook.com/61561065779301/"><i class="fab fa-facebook text-xl"></i></a>  
+        <a href="https://chat.whatsapp.com/CbeizXI3sstDIqy3iV5Kxr"><i class="fab fa-whatsapp text-xl"></i></a>
+      </div>
+      <div class="border-t border-gray-600 pt-4">
+        <p class="text-sm">© 2024 ઈમદાદ ગ્રુપ - ગોંડલ <a href="tel:+918238258024">Devloper</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile Menu Toggle and Auto-Close when clicking outside
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      mobileMenu.classList.toggle("active");
+    });
+    document.addEventListener("click", (e) => {
+      if (!mobileMenu.contains(e.target) && e.target !== menuBtn) {
+        mobileMenu.classList.remove("active");
+      }
+    });
+
+    // Add click behavior to mobile menu options:
+    document.querySelectorAll('#mobile-menu ul li a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Close mobile menu
+        mobileMenu.classList.remove("active");
+        // Smooth scroll to target section
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Intersection Observer for scroll-triggered fade-in effect for sections
+    const sections = document.querySelectorAll("section");
+    const observerOptions = { threshold: 0.3 };
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("section-visible");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(sec => observer.observe(sec));
+
+//<!-- ------------------------------------------------------------------------------------------------------------------------- -->
+
+const toggleBtn = document.getElementById('toggleMonths');
+  const moreMonths = document.getElementById('moreMonths');
+
+  toggleBtn.addEventListener('click', () => {
+    if (moreMonths.classList.contains('hidden')) {
+      moreMonths.classList.remove('hidden');
+      toggleBtn.innerHTML = '<i class="fas fa-eye-slash mr-2"> Short</i> ';
+    } else {
+      moreMonths.classList.add('hidden');
+      toggleBtn.innerHTML = '<i class="fas fa-eye mr-2"></i> More';
+    }
+  });
+
+//<!-- ------------------------------------------------------------------------------------------------------------------------- -->
+
+
+  </script>
+</body>
+</html>
